@@ -1,5 +1,4 @@
-//寫出主選單，將變數i，j寫到最前面並宣告
-//寫出三角形的排列
+//寫出輸入b和c的結果
 
 
 
@@ -92,3 +91,47 @@ printf("--------------------------\n");
 char option;
 printf("請選擇一個選項: ");
 scanf(" %c", &option);
+if (option == 'a' || option == 'A') {
+char c;
+printf("請輸入一個‘a’到‘n’的字元: ");
+scanf(" %c", &c);
+if (c < 'a' || c > 'n') {
+printf("輸入字元不在‘a’至‘n’區間，請重新輸入。\n");
+continue;
+}
+draw_triangle(c);
+} else if (option == 'b' || option == 'B') {
+int n;
+printf("請輸入一個1至9的整數: ");
+scanf("%d", &n);
+if (n < 1 || n > 9) {
+printf("輸入的數字不在1至9區間，請重新輸入。\n");
+continue;
+}
+print_multiplication_table(n);
+} else if (option == 'c' || option == 'C') {
+char c;
+printf("_______\n");
+printf("|  c  |\n");
+printf("|     |\n");
+printf("| bc  |\n");
+printf("|     |\n");
+printf("|abc  |\n");
+printf("_______\n");
+printf("Continue? (y/n): ");
+scanf(" %c", &c);
+  // 根據選項進行操作
+if (c == 'y' || c == 'Y') {
+continue;
+} else if (c == 'n' || c == 'N') {
+break;
+} else {
+printf("輸入的字元不是‘y’或‘n’，請重新輸入。\n");
+continue;
+}
+} else {
+printf("輸入的選項無效，請重新輸入。\n");
+}
+}
+return 0;
+}
