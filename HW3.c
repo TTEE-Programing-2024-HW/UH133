@@ -1,4 +1,4 @@
-//write choose seats by the user 
+//write arrange the seats  
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -123,3 +123,36 @@ void chooseSeats(char seats[ROWS][COLS]) {
         seats[row - 1][col - 1] = '@';
     }
 }
+int main() {
+    char seats[ROWS][COLS];
+    // Initialize all seats as available
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            seats[i][j] = '-';
+        }
+    }
+    srand(time(NULL));
+    // Reserve 10 random seats initially
+    reserveRandomSeats(seats, 10);
+
+    char choice;
+    int attempts = 0;
+    int password = 2024;
+    do {
+        printf("Enter the password: ");
+        int input;
+        scanf("%d", &input);
+        // Check if the entered password is correct
+        if (input == password) {
+            printf("Welcome!\n");
+            break;
+        } else {
+            ++attempts;
+            // Exit the program after 3 incorrect password attempts
+            if (attempts >= 3) {
+                printf("Warning: Three consecutive incorrect attempts. Exiting program.\n");
+                return 0;
+            }
+            printf("Incorrect password. Try again.\n");
+        }
+    }
