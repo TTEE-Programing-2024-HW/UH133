@@ -1,4 +1,5 @@
-//write Booking System choose a and b  
+//write Booking System choose c and d
+//selection  y/n
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -205,3 +206,35 @@ while (1);
                     printf("Invalid number of seats. Please choose between 1 to 4.\n");
                 }
                 break;
+case 'c':
+                // Allow the user to choose seats
+                chooseSeats(seats);
+                // Display the seating chart
+                displaySeats(seats);
+                getchar(); // To capture the Enter key
+                printf("Press any key to confirm your selection.\n");
+                getchar();
+                system("cls"); // Clear the screen
+                break;
+            case 'd':
+                printf("Continue? (y/n): ");
+                char cont;
+                scanf(" %c", &cont);
+                // Check if the user wants to continue or exit
+                if (cont == 'y') {
+                    system("clear"); // Clear the screen
+                } else if (cont == 'n') {
+                    printf("Exiting program.\n");
+                    return 0;
+                } else {
+                    printf("Invalid input. Please enter 'y' or 'n'.\n");
+                }
+                break;
+            default:
+                printf("Invalid choice. Please enter a, b, c, or d.\n");
+                break;
+        }
+    } while (choice != 'd');
+
+    return 0;
+}
