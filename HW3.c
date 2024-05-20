@@ -1,4 +1,4 @@
-//write Constants for seat arrangement and Function to display the seating chart
+//write randomly reserve seats and arrange seats for the user
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,5 +47,55 @@ void displaySeats(char seats[ROWS][COLS]) {
         }
         // Move to the next line after printing all seats in the current row
         printf("\n");
+    }
+}
+// Function to randomly reserve seats
+void reserveRandomSeats(char seats[ROWS][COLS], int numSeats) {
+    int reserved = 0;
+    // Keep reserving seats until the required number of seats have been reserved
+    while (reserved < numSeats) {
+        // Generate a random row and column number
+        int row = rand() % ROWS;
+        int col = rand() % COLS;
+        // If the seat at the generated position is available, reserve it
+        if (seats[row][col] == '-') {
+            seats[row][col] = '*';
+            ++reserved;
+        }
+    }
+}
+
+// Function to arrange seats for the user
+void arrangeSeats(char seats[ROWS][COLS], int numSeats) {
+    // Reserve consecutive seats in the same row
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j <= COLS - numSeats; ++j) {
+            int consecutive = 1;
+            // Check if the next 'numSeats' seats are available
+            for (int k = 0; k < numSeats; ++k) {
+                if (seats[i][j + k] != '-') {
+                    consecutive = 0;
+                    break;
+                }
+            }
+            // If 'numSeats' consecutive seats are available, reserve them
+            if (consecutive) {
+                for (int k = 0; k < numSeats; ++k) {
+                    seats[i][j + k] = '@';
+                }
+                return;
+            }
+        }
+    }
+// If consecutive seats not available, arrange in adjacent rows
+    for (int i = 0; i < ROWS - 1; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            // If seats in two consecutive rows at the same column are available, reserve them
+            if (seats[i][j] == '-' && seats[i + 1][j] == '-') {
+                seats[i][j] = '@';
+                seats[i + 1][j] = '@';
+                return;
+            }
+        }
     }
 }
