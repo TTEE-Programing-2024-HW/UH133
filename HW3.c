@@ -1,4 +1,4 @@
-//write randomly reserve seats and arrange seats for the user
+//write choose seats by the user 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -97,5 +97,29 @@ void arrangeSeats(char seats[ROWS][COLS], int numSeats) {
                 return;
             }
         }
+    }
+}
+// Function to choose seats by the user
+void chooseSeats(char seats[ROWS][COLS]) {
+    int numSeats;
+    printf("Enter the number of seats (1-4): ");
+    scanf("%d", &numSeats);
+    // Check if the entered number of seats is valid
+    if (numSeats < 1 || numSeats > MAX_SEATS) {
+        printf("Invalid number of seats. Please choose 1 to 4 seats.\n");
+        return;
+    }
+    printf("Enter seat choices (e.g., 1-2, 2-9):\n");
+    for (int i = 0; i < numSeats; ++i) {
+        int row, col;
+        // Read the row and column number for the seat choice
+        scanf("%d-%d", &row, &col);
+        // Check if the chosen seat is valid and available
+        if (row < 1 || row > ROWS || col < 1 || col > COLS || seats[row - 1][col - 1] != '-') {
+            printf("Invalid seat choice. Please re-enter.\n");
+            return;
+        }
+        // Reserve the chosen seat
+        seats[row - 1][col - 1] = '@';
     }
 }
