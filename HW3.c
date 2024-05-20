@@ -1,4 +1,4 @@
-//write arrange the seats  
+//write Booking System choose a and b  
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -156,3 +156,52 @@ int main() {
             printf("Incorrect password. Try again.\n");
         }
     }
+while (1);
+
+    do {
+        printf("\n----------[Booking System]----------\n");
+        printf("| a. Available seats               |\n");
+        printf("| b. Arrange for you               |\n");
+        printf("| c. Choose by yourself            |\n");
+        printf("| d. Exit                          |\n");
+        printf("------------------------------------\n");
+        printf("Enter your choice: ");
+        scanf(" %c", &choice);
+        // Perform the action based on the user's choice
+        switch (choice) {
+            case 'a':
+                // Display the seating chart
+                displaySeats(seats);
+                getchar(); // To capture the Enter key
+                printf("Press any key to return to the main menu.\n");
+                getchar();
+                system("cls"); // Clear the screen
+                break;
+            case 'b':
+                printf("How many seats do you need (1-4)? ");
+                int numSeats;
+                scanf("%d", &numSeats);
+                // Check if the entered number of seats is valid
+                if (numSeats >= 1 && numSeats <= MAX_SEATS) {
+                    // Arrange seats for the user
+                    arrangeSeats(seats, numSeats);
+                    // Display the seating chart
+                    displaySeats(seats);
+                    printf("Are you satisfied with these seats? (y/n): ");
+                    char satisfied;
+                    scanf(" %c", &satisfied);
+                    // If the user is satisfied with the arranged seats, confirm the reservation
+                    if (satisfied == 'y') {
+                        for (int i = 0; i < ROWS; ++i) {
+                            for (int j = 0; j < COLS; ++j) {
+                                if (seats[i][j] == '@') {
+                                    seats[i][j] = '*'; // Confirm the reservation
+                                }
+                            }
+                        }
+                    }
+                    system("cls"); // Clear the screen
+                } else {
+                    printf("Invalid number of seats. Please choose between 1 to 4.\n");
+                }
+                break;
