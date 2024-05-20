@@ -1,4 +1,13 @@
-//先完成個人風格畫面
+//write Constants for seat arrangement and Function to display the seating chart
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Constants for seat arrangement
+#define ROWS 9
+#define COLS 9
+#define MAX_SEATS 4
 void display_screen() {
 printf("888888888888888888888888888888888888888888888888888888888888888888888888888\n");
 printf("888888888888888888888888888888888888   888888888888888888888888888888888888\n");
@@ -25,4 +34,18 @@ printf("8      888888888888     88      88       88888  888    88888888      888
 printf("88   888888888888888   8888   88888     888888888888  888888888     8888888\n");
 printf("88888888888888888888888888888888888  88888888888888888888888888888888888888\n");
 printf("888888888888888888888888888888888888888888888888888888888888888888888888888\n");
+}
+// Function to display the seating chart
+void displaySeats(char seats[ROWS][COLS]) {
+    printf("\n");
+    // Loop through each row
+    for (int i = 0; i < ROWS; ++i) {
+        // Loop through each column in the current row
+        for (int j = 0; j < COLS; ++j) {
+            // Print the current seat status
+            printf("%c ", seats[i][j]);
+        }
+        // Move to the next line after printing all seats in the current row
+        printf("\n");
+    }
 }
