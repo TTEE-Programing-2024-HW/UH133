@@ -1,4 +1,4 @@
-//寫能搜尋成績顯示成績排名的函數
+//寫能比較學生的平均成績
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -164,4 +164,12 @@ void gradeRanking(const Student students[], int n) {
     printf("Press any key to continue...\n");
     getchar(); // 捕捉前一個回車鍵
     getchar(); // 等待使用者按鍵
+}
+// 比較學生的平均成績
+int compareAverage(const void *a, const void *b) {
+    Student *studentA = (Student *)a;
+    Student *studentB = (Student *)b;
+    float averageA = (studentA->math + studentA->physics + studentA->english) / 3.0;
+    float averageB = (studentB->math + studentB->physics + studentB->english) / 3.0;
+    return (averageB - averageA); // 降序排序
 }
