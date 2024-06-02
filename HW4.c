@@ -1,4 +1,4 @@
-//寫主選單和宣告函數還有學生結構定義
+//寫能輸入學生成績顯示成績的函數
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -94,4 +94,38 @@ int main() {
 // 清除螢幕函式
 void clearScreen() {
     system("clear || cls");
+}
+// 輸入學生成績
+void enterGrades(Student students[], int *n) {
+    printf("Enter the number of students (5-10): ");
+    scanf("%d", n);
+    if (*n < 5 || *n > 10) {
+        printf("Error: Number of students must be between 5 and 10.\n");
+        return;
+    }
+
+    for (int i = 0; i < *n; i++) {
+        printf("Enter name for student %d: ", i + 1);
+        scanf("%s", students[i].name);
+        printf("Enter ID for student %d (6 digits): ", i + 1);
+        scanf("%d", &students[i].id);
+        printf("Enter Math grade for student %d (0-100): ", i + 1);
+        scanf("%d", &students[i].math);
+        printf("Enter Physics grade for student %d (0-100): ", i + 1);
+        scanf("%d", &students[i].physics);
+        printf("Enter English grade for student %d (0-100): ", i + 1);
+        scanf("%d", &students[i].english);
+    }
+}
+// 顯示所有學生的成績
+void displayGrades(const Student students[], int n) {
+    clearScreen();
+    for (int i = 0; i < n; i++) {
+        float average = (students[i].math + students[i].physics + students[i].english) / 3.0;
+        printf("Name: %s, ID: %06d, Math: %d, Physics: %d, English: %d, Average: %.1f\n",
+               students[i].name, students[i].id, students[i].math, students[i].physics, students[i].english, average);
+    }
+    printf("Press any key to continue...\n");
+    getchar(); // 捕捉前一個回車鍵
+    getchar(); // 等待使用者按鍵
 }
