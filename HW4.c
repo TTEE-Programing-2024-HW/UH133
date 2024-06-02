@@ -1,4 +1,4 @@
-//寫能輸入學生成績顯示成績的函數
+//寫能搜尋成績顯示成績排名的函數
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -124,6 +124,42 @@ void displayGrades(const Student students[], int n) {
         float average = (students[i].math + students[i].physics + students[i].english) / 3.0;
         printf("Name: %s, ID: %06d, Math: %d, Physics: %d, English: %d, Average: %.1f\n",
                students[i].name, students[i].id, students[i].math, students[i].physics, students[i].english, average);
+    }
+    printf("Press any key to continue...\n");
+    getchar(); // 捕捉前一個回車鍵
+    getchar(); // 等待使用者按鍵
+}
+// 搜尋學生的成績
+void searchGrades(const Student students[], int n) {
+    char searchName[50];
+    printf("Enter the name to search: ");
+    scanf("%s", searchName);
+
+    for (int i = 0; i < n; i++) {
+        if (strcmp(students[i].name, searchName) == 0) {
+            float average = (students[i].math + students[i].physics + students[i].english) / 3.0;
+            printf("Name: %s, ID: %06d, Math: %d, Physics: %d, English: %d, Average: %.1f\n",
+                   students[i].name, students[i].id, students[i].math, students[i].physics, students[i].english, average);
+            return;
+        }
+    }
+    printf("Student not found.\n");
+}
+
+//成績排名
+void gradeRanking(const Student students[], int n) {
+    // 複製學生資料以進行排序，以免改變原始數據
+    Student sortedStudents[MAX_STUDENTS];
+    memcpy(sortedStudents, students, sizeof(Student) * n);
+
+    // 使用 qsort 進行排序
+    qsort(sortedStudents, n, sizeof(Student), compareAverage);
+
+    // 顯示排序後的學生資料
+    for (int i = 0; i < n; i++) {
+        float average = (sortedStudents[i].math + sortedStudents[i].physics + sortedStudents[i].english) / 3.0;
+        printf("Name: %s, ID: %06d, Average: %.1f\n",
+               sortedStudents[i].name, sortedStudents[i].id, average);
     }
     printf("Press any key to continue...\n");
     getchar(); // 捕捉前一個回車鍵
